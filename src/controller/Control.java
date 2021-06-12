@@ -9,16 +9,24 @@ import model.Product;
 
 public class Control {
 
-	//encapsulated objects
+	/*
+	 * encapsulated objects
+	 */
 	
 	private static Food f = new Food();
 	private static Drink d = new Drink();
 	
 	private static List<Product> listOfProducts = new ArrayList<>();
 	
-	// factory method for products
-
-	// getter and setter
+	/*
+	 *  TODO factory method for products
+	 */
+	
+//	public factoryMethod() {}
+	
+	/*
+	 *  getter and setter
+	 */
 	public Food getFood() {
 		return f;
 	}
@@ -35,6 +43,5 @@ public class Control {
 		listOfProducts.add(new Drink());
 
 	}
-	
-	// no main
+
 }
