@@ -1,11 +1,13 @@
 package controller;
 
-import view.View;
-import view.Functions;
-
 import static java.lang.System.out;
 
 import java.util.Scanner;
+
+import model.GetProductFactory;
+import model.Product;
+import view.Functions;
+import view.View;
 
 /*
  * Menu is created as a Singleton
@@ -57,27 +59,53 @@ final public class Menu implements Runnable {
 			out.print("--> ");
 			s = sc.next();
 			
-			if(s.equalsIgnoreCase("recipe")) {
-				funcConsole.recipe();
-				System.out.println("RECIPE : COMING SOON");
+			if(s.equalsIgnoreCase("RECIPE")) {
+				Product recipe = new GetProductFactory().getProduct();
+				if(recipe != null) {
+					out.println("Recipe : " + recipe.getName());
+					recipe.getIng();
+				} else {
+					System.out.println("ERROR: No recipes in the system.");
+				}
 				
-			} else if(s.equalsIgnoreCase("add")) { 
-				funcConsole.add();
-				System.out.println("ADD : COMING SOON");
+			} else if(s.equalsIgnoreCase("ADD")) { 
+				System.out.print("Please specify a Food or Drink: ...(Hint: choose food) : ");
+				String recipeType = sc.next();
 				
-			} else if(s.equalsIgnoreCase("delete")) { 
+				if(recipeType.equalsIgnoreCase("FOOD")) {
+					System.out.print("What is the name of your dish? : ");
+					String recipeName = sc.next();
+					
+					var food = new GetProductFactory().getProduct(recipeType, recipeName);
+					
+					System.out.print("How many ingredients are included? : ");
+					int numOfIngredients = sc.nextInt();
+					
+					for(int i = 0; i < numOfIngredients; i++) {
+						System.out.print("Next Ingredient : ");
+						String ing = sc.next();
+						food.addIng(ing);
+					}
+					
+					System.out.println("Your recipe " + recipeName + ", has been added.");
+					System.out.println();
+					
+				} else if (recipeType.equalsIgnoreCase("DRINK")) {
+					//
+				}
+				
+			} else if(s.equalsIgnoreCase("DELETE")) { 
 				funcConsole.delete();
 				System.out.println("DELETE : COMING SOON");
 				
-			} else if(s.equalsIgnoreCase("help")) { 
+			} else if(s.equalsIgnoreCase("HELP")) { 
 				funcConsole.help();
 				
-			} else if(s.equalsIgnoreCase("exit")) { 
+			} else if(s.equalsIgnoreCase("EXIT")) { 
 				funcConsole.exit();
 				
-			} else if(s.equalsIgnoreCase("dev")) { 
+			} else if(s.equalsIgnoreCase("DEV")) { 
 				funcConsole.dev();
-				System.out.println("DEV : COMING SOON");
 				
 			} else {
 				viewConsole.error();

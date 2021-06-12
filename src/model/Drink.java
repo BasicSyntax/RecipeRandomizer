@@ -1,23 +1,42 @@
 package model;
 
+import java.util.List;
+
 public class Drink extends Product {
 
-	private static String name;
+	private String name;
+	private List<String> listOfIngredients;
 	
 	public Drink() {
-		Drink.setName("Unnamed");
+		this.setName("Unnamed");
 	}
 	
 	public Drink(String s) {
-		Drink.setName(s);
+		this.setName(s);
 		
 	}
 
-	public static String getName() {
+	@Override
+	public String getName() {
 		return name;
 	}
 
-	public static void setName(String name) {
-		Drink.name = name;
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@Override
+	public void addIng(String ingredient) {
+		this.listOfIngredients.add(ingredient);
+	}
+	
+	@Override
+	public void getIng() {
+		int len = this.listOfIngredients.size();
+		
+		for (int i = 0; i < len; i++) {
+			System.out.println(i + ") " + this.listOfIngredients.get(i));
+		}
 	}
 }

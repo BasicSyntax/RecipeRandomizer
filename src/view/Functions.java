@@ -5,19 +5,6 @@ import controller.Menu;
 
 public class Functions {
 	
-	/*
-	 * Random recipe generator
-	 */
-	public void recipe() {
-		//
-	}
-	
-	/*
-	 * Recipe add function, will be collection for testing, then perm file 
-	 */
-	public void add() {
-		//
-	}
 	
 	/*
 	 * Recipe delete function, will be collection for testing, then perm file
@@ -52,6 +39,11 @@ public class Functions {
 	 * Information about me as a Java Developer
 	 */
 	public void dev() {
-		//
+		out.println("RecipeRandomizer, Made by Beaumont Spinks using Java 11");
+		out.println();
+		out.println("Github link: https://github.com/BasicSyntax/RecipeRandomizer");
+		out.println();
+		out.println("LinkedIn profile: https://www.linkedin.com/in/beauspinks/");
+		out.println();
 	}
 }
