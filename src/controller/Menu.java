@@ -4,13 +4,12 @@ import static java.lang.System.out;
 
 import java.util.Scanner;
 
-import model.GetProductFactory;
-import model.Product;
 import view.Functions;
 import view.View;
 
 /*
- * Menu is created as a Singleton
+ * Menu is created as a Singleton 
+ * to enforce that only one instance of the run() occurs
  * Implements Runnable to operate the run function on a thread
  */
 final public class Menu implements Runnable {
@@ -49,69 +48,45 @@ final public class Menu implements Runnable {
 	public void run() {
 		try {
 			viewConsole.onStart();
-			funcConsole.help();
+			viewConsole.commands();
 			isRunning = true;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		
 		while(isRunning == true) {
+			out.println();
 			out.print("--> ");
 			s = sc.next();
 			
-			if(s.equalsIgnoreCase("RECIPE")) {
-				Product recipe = new GetProductFactory().getProduct();
-				if(recipe != null) {
-					out.println("Recipe : " + recipe.getName());
-					recipe.getIng();
-				} else {
-					System.out.println("ERROR: No recipes in the system.");
-				}
+			if(s.equalsIgnoreCase("G")) {
+				funcConsole.generate();
 				
-			} else if(s.equalsIgnoreCase("ADD")) { 
-				System.out.print("Please specify a Food or Drink: ...(Hint: choose food) : ");
+			} else if(s.equalsIgnoreCase("A")) { 
+				System.out.print("Please choose Sweet or Savoury: ");
 				String recipeType = sc.next();
 				
-				if(recipeType.equalsIgnoreCase("FOOD")) {
-					System.out.print("What is the name of your dish? : ");
-					String recipeName = sc.next();
+//				if(recipeType.equalsIgnoreCase("SWEET")) {
+					funcConsole.addProduct(recipeType, sc);
 					
-					var food = new GetProductFactory().getProduct(recipeType, recipeName);
-					
-					System.out.print("How many ingredients are included? : ");
-					int numOfIngredients = sc.nextInt();
-					
-					for(int i = 0; i < numOfIngredients; i++) {
-						System.out.print("Next Ingredient : ");
-						String ing = sc.next();
-						food.addIng(ing);
-					}
-					
-					System.out.println("Your recipe " + recipeName + ", has been added.");
-					System.out.println();
-					
-				} else if (recipeType.equalsIgnoreCase("DRINK")) {
-					//
-				}
+//				} else if (recipeType.equalsIgnoreCase("SAVOURY")) {
+//					funcConsole.addSavoury();
+//				}
 				
-			} else if(s.equalsIgnoreCase("DELETE")) { 
-				funcConsole.delete();
-				System.out.println("DELETE : COMING SOON");
-				
-			} else if(s.equalsIgnoreCase("HELP")) { 
-				funcConsole.help();
-				
-			} else if(s.equalsIgnoreCase("EXIT")) { 
+			} else if(s.equalsIgnoreCase("E")) { 
 				funcConsole.exit();
 				
-			} else if(s.equalsIgnoreCase("DEV")) { 
+			} else if(s.equalsIgnoreCase("D")) { 
 				funcConsole.dev();
 				
+			} else if(s.equalsIgnoreCase("PRINTALL"))  {
+				funcConsole.allRecipes();
 			} else {
 				viewConsole.error();
 			}
 		}	
 		
+		sc.close();
 		System.out.println();
 		System.out.println("Terminating ...");
 		System.out.println();

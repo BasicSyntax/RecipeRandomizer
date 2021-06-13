@@ -3,23 +3,23 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Food extends Product {
+public class Sweet extends Product {
 
 	private String name;
 	private List<String> listOfIngredients;
 	
-	public Food() {
+	public Sweet() {
 		this.setName("Unnamed");
 		listOfIngredients = new ArrayList<>();
 	}
 	
-	public Food(String name) {
+	public Sweet(String name) {
 		this.setName(name);
 		listOfIngredients = new ArrayList<>();
 		
 	}
 	
-	public Food(String name, int numOfIngredients) {
+	public Sweet(String name, int numOfIngredients) {
 		this.setName(name);
 		listOfIngredients = new ArrayList<>(numOfIngredients);
 		
@@ -31,7 +31,7 @@ public class Food extends Product {
 	}
 
 	@Override
-	public void setName(String name) {
+	protected void setName(String name) {
 		this.name = name;
 	}
 	
@@ -45,7 +45,7 @@ public class Food extends Product {
 		int len = this.listOfIngredients.size();
 		
 		for (int i = 0; i < len; i++) {
-			System.out.println(i + ") " + this.listOfIngredients.get(i));
+			System.out.println(( i + 1 ) + ") " + this.listOfIngredients.get(i));
 		}
 	}
 }

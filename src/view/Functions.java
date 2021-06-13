@@ -1,33 +1,101 @@
 package view;
 
 import static java.lang.System.out;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import controller.ProductFactory;
 import controller.Menu;
+import model.Product;
 
 public class Functions {
 	
+	/*
+	 * Generate recipe from  collection
+	 */
+	public void generate() {
+		var recipe = new ProductFactory().getProduct();
+		if(recipe != null) {
+			out.println("Name : " + recipe.getName());
+			recipe.getIng();
+		} else {
+			System.out.println("ERROR: No recipes in the system.");
+		}
+	}
 	
 	/*
-	 * Recipe delete function, will be collection for testing, then perm file
+	 * add food
 	 */
-	public void delete() {
-		//
-	}
-	 
-	/** 
-	  * method which will run after the introduction
-	  * also runs when "help" command is called
-	  */
-	public void help() {
-		out.println("to show all user command please enter : help");
-		out.println("to add a recipe please enter : add");
-		out.println("to delete a recipe please enter : delete");
-		out.println("to generate a random recipe please enter : recipe");
-		out.println("to exit out of the program please enter : exit");
-		out.println("to see more details from the amazing developer ");
-		out.println("with links to GitHub and LinkedIn, please enter : dev");
-		out.println();
+	public void addProduct(String productType, Scanner sc) {
+//		Scanner scSweet = new Scanner(System.in);
+		String recipeName = "";
+		Product sweetFood = null;
+		int numOfIngredients = 0;
+		
+		try {
+			System.out.print("What is the name of your dish? : ");
+			recipeName = sc.next();
+			
+			sweetFood = new ProductFactory().newProduct(productType, recipeName);
+			
+			System.out.print("How many ingredients are included? : ");
+			numOfIngredients = sc.nextInt();
+		
+			for(int i = 0; i < numOfIngredients; i++) {
+				System.out.print("Next Ingredient : ");
+				String ing = sc.next();
+				sweetFood.addIng(ing);
+			}
+		} catch (InputMismatchException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+//		sc.close();
+		System.out.println("Your recipe " + recipeName + ", has been added.");
 	}
 	
+//	public void addSavoury() {
+//		Scanner scSavoury = new Scanner(System.in);
+//		String recipeName = "";
+//		Product savouryfood = null;
+//		int numOfIngredients = 0;
+//		
+//		try {
+//			System.out.print("What is the name of your dish? : ");
+//			recipeName = scSavoury.next();
+//			
+//			savouryfood = new GetProductFactory().newProduct("Savoury", recipeName);
+//			
+//			System.out.print("How many ingredients are included? : ");
+//			numOfIngredients = scSavoury.nextInt();
+//		
+//			for(int i = 0; i < numOfIngredients; i++) {
+//				System.out.print("Next Ingredient : ");
+//				String ing = scSavoury.next();
+//				savouryfood.addIng(ing);
+//			}
+//		} catch (InputMismatchException e) {
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		scSavoury.close();
+//		System.out.println("Your recipe " + recipeName + ", has been added.");
+//		System.out.println();
+//	}
+	
+	/*
+	 * essentially hidden from user 
+	 * print all recipe function, just recipe names though
+	 * TODO only accessible by admin user
+	 */
+	public void allRecipes() {
+		new ProductFactory().printAllRecipes();
+	}
 	/*
 	 * Termination function, 
 	 */
@@ -44,6 +112,5 @@ public class Functions {
 		out.println("Github link: https://github.com/BasicSyntax/RecipeRandomizer");
 		out.println();
 		out.println("LinkedIn profile: https://www.linkedin.com/in/beauspinks/");
-		out.println();
 	}
 }
