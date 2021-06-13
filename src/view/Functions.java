@@ -12,8 +12,8 @@ import model.Product;
 public class Functions {
 	
 	// Generate recipe from collection
-	public void generate() {
-		var recipe = new ProductFactory().getProduct();
+	public void generate(String recipeType) {
+		var recipe = new ProductFactory().getProduct(recipeType);
 		
 		if(recipe != null) {
 			out.println("Name : " + recipe.getName());

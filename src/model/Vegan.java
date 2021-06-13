@@ -3,27 +3,27 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sweet extends Product {
+public class Vegan extends Product {
 
 	// Class Variables
 	private String name;
 	private List<String> listOfIngredients;
 	
 	// Constructors
-	public Sweet() {
+	public Vegan() {
 		this.setName("Unnamed");
 		listOfIngredients = new ArrayList<>();
 		
 	}
 	
-	public Sweet(String name) {
+	public Vegan(String name) {
 		if(name.isBlank()) this.setName("Unnamed");
 		else this.setName(name);
 		listOfIngredients = new ArrayList<>();
 		
 	}
 	
-	public Sweet(String name, int numOfIngredients) {
+	public Vegan(String name, int numOfIngredients) {
 		if(name.isBlank()) this.setName("Unnamed");
 		else this.setName(name);
 		listOfIngredients = new ArrayList<>(numOfIngredients);

@@ -55,12 +55,28 @@ final public class MainController implements Runnable {
 			s = sc.nextLine();
 			
 			if(s.equalsIgnoreCase("G")) {
-				funcConsole.generate();
+				System.out.print("Please choose vegetarian, vegan or any (press \"C\" to cancel)  : ");
+				String recipeType = sc.nextLine().toUpperCase();
+				if(recipeType.equals("VEGETARIAN")) {
+					funcConsole.generate("VEGETARIAN");
+					
+				} else if (recipeType.equals("VEGAN")) {
+					funcConsole.generate("VEGAN");
+					
+				} else if (recipeType.equals("ANY")) {
+					funcConsole.generate("ANY");
+					
+				} else if(recipeType.equalsIgnoreCase("C")) {
+					System.out.println();
+					viewConsole.commands();
+				} else {
+					viewConsole.error();
+				}
 				
 			} else if(s.equalsIgnoreCase("A")) { 
-				System.out.print("Please choose Sweet or Savoury (press \"C\" to cancel)  : ");
+				System.out.print("Please choose vegetarian, vegan or any (press \"C\" to cancel)  : ");
 				String recipeType = sc.nextLine();
-				if(recipeType.equalsIgnoreCase("SAVOURY") || recipeType.equalsIgnoreCase("SWEET")) {
+				if(recipeType.equalsIgnoreCase("VEGETARIAN") || recipeType.equalsIgnoreCase("VEGAN") || recipeType.equalsIgnoreCase("ANY")) {
 					funcConsole.addProduct(recipeType, sc, viewConsole);
 					
 				} else if(recipeType.equalsIgnoreCase("C")) {
