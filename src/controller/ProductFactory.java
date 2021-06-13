@@ -68,7 +68,6 @@ public class ProductFactory {
 		listOfProducts.stream().forEach(e -> {
 			System.out.println("Recipe : " + e.getName());
 			e.getIng();
-			System.out.println();
 		});
 		
 	}

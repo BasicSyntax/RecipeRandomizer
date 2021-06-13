@@ -3,7 +3,7 @@ package view;
 import static java.lang.System.out;
 import java.util.concurrent.TimeUnit;
 
-public class View {
+public class MainView {
 
 	/*
 	 * Method to run once at the start
@@ -23,14 +23,12 @@ public class View {
 	/** 
 	  * method which will run after the introduction
 	  */
-	public void commands() throws InterruptedException {
+	public void commands() {
 		out.println("to generate a random recipe please enter : \"G\"");
 		out.println("to add a recipe please enter : \"A\"");
 		out.println("to exit out of the program please enter : \"E\"");
-		TimeUnit.SECONDS.sleep(1);
 		out.println();
 		out.println("to see more details about the amazing developer ");
-		TimeUnit.SECONDS.sleep(1);
 		out.println("with links to GitHub and LinkedIn, please enter : \"D\"");
 		
 	}

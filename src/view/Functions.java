@@ -27,34 +27,50 @@ public class Functions {
 	}
 	
 	// add food
-	public void addProduct(String productType, Scanner sc) {
+	public void addProduct(String productType, Scanner sc, MainView viewConsole) {
 		String recipeName = "";
 		Product sweetFood = null;
 		
-		try {
-			System.out.print("What is the name of your dish? : ");
-			recipeName = sc.nextLine();
-			
-			sweetFood = new ProductFactory().newProduct(productType, recipeName);
-			
-			System.out.print("Type out all the ingredients : ");
-			String stringOfIng = sc.nextLine();
-			String[] listOfIng = stringOfIng.split( "[\\s,]+" );
-
-			for(int i = 0; i < listOfIng.length; i++) {
-				String ing = listOfIng[i];
-				sweetFood.addIng(ing);
+		while(true) {
+			try {
+				System.out.print("What is the name of your dish? (press \"C\" to cancel) : ");
+				recipeName = sc.nextLine();
+				
+				if(recipeName.equalsIgnoreCase("C")) {
+					System.out.println();
+					viewConsole.commands();
+					break;
+				} 
+				
+				sweetFood = new ProductFactory().newProduct(productType, recipeName);
+				
+				System.out.print("Type out all the ingredients (press \"C\" to cancel) : ");
+				String stringOfIng = sc.nextLine();
+				
+				if(stringOfIng.equalsIgnoreCase("C")) {
+					System.out.println();
+					viewConsole.commands();
+					break;
+				} 
+				
+				String[] listOfIng = stringOfIng.split( "[\\s,]+" );
+	
+				for(int i = 0; i < listOfIng.length; i++) {
+					String ing = listOfIng[i];
+					sweetFood.addIng(ing);
+					
+				}
+			} catch (InputMismatchException e) {
+				e.printStackTrace();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
 				
 			}
-		} catch (InputMismatchException e) {
-			e.printStackTrace();
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-			
+			System.out.println("Your recipe " + recipeName + ", has been added.");
+			break;
 		}
-		
-		System.out.println("Your recipe " + recipeName + ", has been added.");
 	}
 	
 	/*

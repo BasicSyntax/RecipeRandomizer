@@ -5,7 +5,7 @@ import static java.lang.System.out;
 import java.util.Scanner;
 
 import view.Functions;
-import view.View;
+import view.MainView;
 
 /*
  * Menu is created as a Singleton 
@@ -18,7 +18,7 @@ final public class MainController implements Runnable {
 	private static MainController menu;
 	private boolean isRunning;
 	private Scanner sc = new Scanner(System.in);
-	private View viewConsole = new View();
+	private MainView viewConsole = new MainView();
 	private Functions funcConsole = new Functions();
 	private String s;
 	
@@ -58,9 +58,17 @@ final public class MainController implements Runnable {
 				funcConsole.generate();
 				
 			} else if(s.equalsIgnoreCase("A")) { 
-				System.out.print("Please choose Sweet or Savoury: ");
+				System.out.print("Please choose Sweet or Savoury (press \"C\" to cancel)  : ");
 				String recipeType = sc.nextLine();
-				funcConsole.addProduct(recipeType, sc);
+				if(recipeType.equalsIgnoreCase("SAVOURY") || recipeType.equalsIgnoreCase("SWEET")) {
+					funcConsole.addProduct(recipeType, sc, viewConsole);
+					
+				} else if(recipeType.equalsIgnoreCase("C")) {
+					System.out.println();
+					viewConsole.commands();
+				} else {
+					viewConsole.error();
+				}
 				
 			} else if(s.equalsIgnoreCase("E")) { 
 				funcConsole.exit();
