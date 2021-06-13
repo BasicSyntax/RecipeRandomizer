@@ -6,4 +6,5 @@ public abstract class Product {
 	protected abstract void setName(String name);
 	public abstract void addIng(String ing);
 	public abstract void getIng();
+	
 }

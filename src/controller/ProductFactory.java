@@ -18,7 +18,9 @@ public class ProductFactory {
 	static {
 		listOfProducts = new ArrayList<>();
 		new ProductFactory().loadRecipes();
+		
 	}
+	
 	/*
 	 * encapsulated static list of recipes
 	 * TODO transferred to an postgreSQL database
@@ -47,27 +49,27 @@ public class ProductFactory {
 		return null;  
 	}
 	
-	 //getters and setters
+	 // getters and setters
 	public Product getProduct() {
 		if(listOfProducts.size() <= 0) return null;
 		Random rand = new Random();
 		int pos = rand.nextInt(listOfProducts.size());
 		return listOfProducts.get(pos);
+		
 	}
-	
-//	void setSweet(String f) {
-//		listOfProducts.add(new Sweet());
-//	}
-//	
-//	//
-//	void setSavoury() {
-//		listOfProducts.add(new Savoury());
-//
-//	}
 	
 	// secret method to print all recipes
 	public void printAllRecipes() {
 		listOfProducts.stream().forEach(e -> System.out.println("Recipe : " + e.getName()));
+		
+	}
+	
+	public void printAllRecipesAndIngredients() {
+		listOfProducts.stream().forEach(e -> {
+			System.out.println("Recipe : " + e.getName());
+			e.getIng();
+			System.out.println();
+		});
 		
 	}
 	
@@ -100,5 +102,7 @@ public class ProductFactory {
 		cheeseCake.addIng("Digestive Biscuits");
 		cheeseCake.addIng("Soft Cheese");
 		cheeseCake.addIng("Strawberries");
+		
 	}
+	
 }

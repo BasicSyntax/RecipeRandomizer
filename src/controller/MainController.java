@@ -12,66 +12,55 @@ import view.View;
  * to enforce that only one instance of the run() occurs
  * Implements Runnable to operate the run function on a thread
  */
-final public class Menu implements Runnable {
+final public class MainController implements Runnable {
 
-	/*
-	 * encapsulated class variables
-	 */
-	private static Menu menu;
+	// encapsulated class variables
+	private static MainController menu;
 	private boolean isRunning;
 	private Scanner sc = new Scanner(System.in);
 	private View viewConsole = new View();
 	private Functions funcConsole = new Functions();
 	private String s;
 	
-	/*
-	 * private constructor
-	 */
-	private Menu() {
+	// private constructor
+	private MainController() {
 		
 	}
 	
-	/*
-	 * getter for Singleton instance
-	 */
-	public static Menu getInstance() {
+	// getter for Singleton instance
+	public static MainController getInstance() {
         if(menu == null) {
-            menu = new Menu();
+            menu = new MainController();
+            
         }
-        
         return menu;
+        
     }
 	
-	/*
-	 * run method, keeps program alive while isRunning is true
-	 */
+	// run method, keeps program alive while isRunning is true
 	public void run() {
 		try {
 			viewConsole.onStart();
 			viewConsole.commands();
 			isRunning = true;
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			
 		}
 		
 		while(isRunning == true) {
 			out.println();
 			out.print("--> ");
-			s = sc.next();
+			s = sc.nextLine();
 			
 			if(s.equalsIgnoreCase("G")) {
 				funcConsole.generate();
 				
 			} else if(s.equalsIgnoreCase("A")) { 
 				System.out.print("Please choose Sweet or Savoury: ");
-				String recipeType = sc.next();
-				
-//				if(recipeType.equalsIgnoreCase("SWEET")) {
-					funcConsole.addProduct(recipeType, sc);
-					
-//				} else if (recipeType.equalsIgnoreCase("SAVOURY")) {
-//					funcConsole.addSavoury();
-//				}
+				String recipeType = sc.nextLine();
+				funcConsole.addProduct(recipeType, sc);
 				
 			} else if(s.equalsIgnoreCase("E")) { 
 				funcConsole.exit();
@@ -81,9 +70,15 @@ final public class Menu implements Runnable {
 				
 			} else if(s.equalsIgnoreCase("PRINTALL"))  {
 				funcConsole.allRecipes();
+				
+			} else if(s.equalsIgnoreCase("PRINTALLWI"))  {
+				funcConsole.allRecipesAndIngredients();
+				
 			} else {
 				viewConsole.error();
+				
 			}
+			
 		}	
 		
 		sc.close();
@@ -93,12 +88,13 @@ final public class Menu implements Runnable {
 		System.out.println("I Hope you liked my work !");
 		System.out.println();
 		System.out.println("Goodbye !");
+		
 	}
 	
-	/*
-	 * encapsulated method to terminate while loop and let thread end
-	 */
+	// encapsulated method to terminate while loop and let thread end
 	public void stopRunning() {
 		menu.isRunning = false;
+		
 	}
+	
 }
