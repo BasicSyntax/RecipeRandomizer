@@ -3,7 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import static java.util.stream.Collectors.*;
+import java.util.stream.Collectors;
 
 import model.AnyFood;
 import model.Product;
@@ -63,13 +63,13 @@ public class ProductFactory {
 			selectedProducts = listOfProducts
 					.stream()
 					.filter(o -> !(o instanceof AnyFood))
-					.collect(toList());
+					.collect(Collectors.toList());
 			
 		} else if (recipeType == "VEGAN") {
 			selectedProducts = listOfProducts
 					.stream()
 					.filter(o -> o instanceof Vegan)
-					.collect(toList());
+					.collect(Collectors.toList());
 			
 		} else if (recipeType == "ANY") {
 			if(listOfProducts.size() <= 0) return null;
